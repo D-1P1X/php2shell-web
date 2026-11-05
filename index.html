@@ -22,8 +22,38 @@
     </header>
 
     <main>
-        <h1>PHP2Shell</h1>
-        <p>Web o kritických zranitelnostech v PHP z října 2026.</p>
+        <div class="terminal">
+            <div class="terminal-title">root@php2shell:~$ cat README.md</div>
+            <p><span class="prompt">&gt;</span> Dvě kritické chyby v jádru PHP, přezdívané <strong>PHP2Shell</strong>,
+            umožnily útočníkům spustit vlastní kód na nezáplatovaném serveru bez přihlášení.
+            Detaily unikly ještě před oficiálním záplatováním a zneužití začalo během pár dní.<span class="cursor"></span></p>
+        </div>
+
+        <img src="img/hero.svg" alt="Ilustrace tří PHP serverů, z nichž jeden má prasklinu symbolizující RCE zranitelnost">
+
+        <h2>Co se stalo</h2>
+        <p>V říjnu 2026 unikly informace o dvou zranitelnostech v jádru PHP, <code>CVE-2026-109618</code>
+        a <code>CVE-2026-109619</code>, společně nazývaných <strong>PHP2Shell</strong>. Obě umožňují
+        neautentizované vzdálené spuštění kódu (RCE) a dotýkají se téměř všech verzí PHP od 5.4 až po 8.5,
+        tedy odhadem až 70 % webu postaveného na PHP.</p>
+
+        <div class="card-grid">
+            <div class="card">
+                <span class="tag">kritická</span>
+                <h3>CVE-2026-109618</h3>
+                <p>CVSS 9.2. Chyba při nedostatku paměti za chodu PHP, která zanechá poloinicializovanou
+                datovou strukturu zneužitelnou v rámci stejného požadavku.</p>
+            </div>
+            <div class="card">
+                <span class="tag">kritická</span>
+                <h3>CVE-2026-109619</h3>
+                <p>CVSS 9.2. Zastaralý stav globálních proměnných přežívající přes hranici požadavku,
+                který lze zneužít v dalším requestu na stejném PHP workeru.</p>
+            </div>
+        </div>
+
+        <p>Více technických detailů najdeš na podstránce <a href="zranitelnost.html">Zranitelnost</a>,
+        doporučené kroky na stránce <a href="ochrana.html">Ochrana</a>.</p>
     </main>
 
     <footer class="site-footer">
