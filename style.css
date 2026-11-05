@@ -1,12 +1,13 @@
 :root {
-    --bg: #0d1117;
-    --panel: #161b22;
-    --line: #2a313c;
-    --text: #e6edf3;
-    --muted: #9aa7b4;
-    --alert: #ff6b35;
-    --ok: #3fb950;
-    --mono: ui-monospace, "SF Mono", Consolas, "Liberation Mono", monospace;
+    --bg: #010401;
+    --panel: #061206;
+    --line: #0f3d0f;
+    --text: #33ff33;
+    --text-dim: #1fae1f;
+    --muted: #2a8f2a;
+    --alert: #ff3333;
+    --ok: #33ff33;
+    --mono: "JetBrains Mono", "Fira Code", "Courier New", ui-monospace, Consolas, monospace;
 }
 
 * { box-sizing: border-box; }
@@ -15,13 +16,31 @@ body {
     margin: 0;
     background: var(--bg);
     color: var(--text);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-family: var(--mono);
     line-height: 1.65;
+    text-shadow: 0 0 2px rgba(51, 255, 51, 0.35);
+    background-image:
+        repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 3px);
 }
 
-h1, h2, h3 { line-height: 1.2; }
-a { color: var(--alert); }
-code { font-family: var(--mono); background: var(--panel); padding: 0.1em 0.4em; border-radius: 4px; }
+h1, h2, h3 {
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+h1::before, h2::before, h3::before { content: "> "; color: var(--muted); }
+
+a { color: var(--ok); text-decoration: underline; text-decoration-color: var(--line); }
+a:hover { color: #ffffff; text-decoration-color: var(--ok); }
+
+code {
+    font-family: var(--mono);
+    background: var(--panel);
+    padding: 0.1em 0.4em;
+    border-radius: 2px;
+    border: 1px solid var(--line);
+}
 
 /* Hlavička a menu */
 .site-header {
@@ -36,15 +55,19 @@ code { font-family: var(--mono); background: var(--panel); padding: 0.1em 0.4em;
     position: sticky;
     top: 0;
     z-index: 10;
+    box-shadow: 0 0 20px rgba(51, 255, 51, 0.08);
 }
 
 .brand {
     font-family: var(--mono);
     font-weight: 700;
     font-size: 1.25rem;
-    color: var(--text);
+    color: var(--ok);
     text-decoration: none;
+    letter-spacing: 0.05em;
 }
+
+.brand::before { content: "$ "; color: var(--muted); }
 
 .site-header nav { display: flex; flex-wrap: wrap; gap: 0.25rem; }
 
@@ -52,11 +75,15 @@ code { font-family: var(--mono); background: var(--panel); padding: 0.1em 0.4em;
     color: var(--muted);
     text-decoration: none;
     padding: 0.4rem 0.9rem;
-    border-radius: 6px;
+    border: 1px solid transparent;
+    border-radius: 2px;
 }
 
-.site-header nav a:hover { color: var(--text); background: var(--line); }
-.site-header nav a.active { color: var(--bg); background: var(--alert); font-weight: 600; }
+.site-header nav a::before { content: "/"; color: var(--line); margin-right: 0.3em; }
+
+.site-header nav a:hover { color: var(--text); border-color: var(--line); background: rgba(51, 255, 51, 0.06); }
+.site-header nav a.active { color: #010401; background: var(--ok); font-weight: 600; border-color: var(--ok); }
+.site-header nav a.active::before { color: #010401; }
 
 main { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
 
@@ -65,5 +92,91 @@ main { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
     padding: 1.5rem;
     text-align: center;
     color: var(--muted);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+}
+
+/* Terminálové prvky */
+.terminal {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    box-shadow: 0 0 25px rgba(51, 255, 51, 0.06) inset;
+}
+
+.terminal .prompt { color: var(--muted); }
+
+.terminal-title {
+    font-size: 0.75rem;
+    color: var(--muted);
+    border-bottom: 1px dashed var(--line);
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+}
+
+.cursor {
+    display: inline-block;
+    width: 0.6em;
+    height: 1em;
+    background: var(--ok);
+    animation: blink 1s steps(1) infinite;
+    vertical-align: middle;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 1rem;
+}
+
+.card h3 { margin-top: 0; font-size: 1rem; color: var(--ok); }
+
+.tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    border: 1px solid var(--alert);
+    color: var(--alert);
+    padding: 0.1rem 0.5rem;
+    border-radius: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+}
+
+th, td {
+    border: 1px solid var(--line);
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+}
+
+th { background: var(--panel); color: var(--ok); }
+
+img { max-width: 100%; border: 1px solid var(--line); border-radius: 4px; display: block; margin: 1.5rem 0; }
+
+.steps { padding-left: 1.2rem; }
+.steps li { margin-bottom: 0.6rem; }
+
+blockquote {
+    border-left: 3px solid var(--alert);
+    margin: 1.5rem 0;
+    padding: 0.5rem 1rem;
+    color: var(--text-dim);
+    background: var(--panel);
 }

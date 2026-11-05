@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" role="img" aria-label="Časová osa zveřejnění a zneužití zranitelností">
+  <rect width="1000" height="300" fill="#061206"/>
+  <line x1="60" y1="150" x2="940" y2="150" stroke="#0f3d0f" stroke-width="3"/>
+  <g font-family="JetBrains Mono, Consolas, monospace" font-size="13" fill="#33ff33">
+    <circle cx="120" cy="150" r="9" fill="#2a8f2a"/>
+    <text x="120" y="120" text-anchor="middle">1. srpna</text>
+    <text x="120" y="190" text-anchor="middle" fill="#2a8f2a">Chyby nalezeny</text>
+
+    <circle cx="340" cy="150" r="9" fill="#ff3333"/>
+    <text x="340" y="120" text-anchor="middle">17. října</text>
+    <text x="340" y="190" text-anchor="middle" fill="#2a8f2a">První pokusy o zneužití</text>
+
+    <circle cx="560" cy="150" r="9" fill="#ff3333"/>
+    <text x="560" y="120" text-anchor="middle">20. října</text>
+    <text x="560" y="190" text-anchor="middle" fill="#2a8f2a">Únik detailů před embargem</text>
+
+    <circle cx="760" cy="150" r="9" fill="#33ff33"/>
+    <text x="760" y="120" text-anchor="middle">21. října</text>
+    <text x="760" y="190" text-anchor="middle" fill="#2a8f2a">Nouzové záplaty</text>
+
+    <circle cx="920" cy="150" r="9" fill="#33ff33"/>
+    <text x="920" y="120" text-anchor="middle">26. října</text>
+    <text x="920" y="190" text-anchor="middle" fill="#2a8f2a">Zařazeno do CISA KEV</text>
+  </g>
+</svg>

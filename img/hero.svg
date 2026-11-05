@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 420" role="img" aria-label="Ilustrace narušeného PHP serveru">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#010401"/>
+      <stop offset="1" stop-color="#061206"/>
+    </linearGradient>
+    <linearGradient id="crack" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff3333"/>
+      <stop offset="1" stop-color="#1fae1f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="420" fill="url(#bg)"/>
+  <g fill="none" stroke="#0f3d0f" stroke-width="2">
+    <rect x="60" y="70" width="260" height="280" rx="10"/>
+    <rect x="370" y="70" width="260" height="280" rx="10"/>
+    <rect x="680" y="70" width="260" height="280" rx="10"/>
+  </g>
+  <g fill="#2a8f2a" font-family="JetBrains Mono, Consolas, monospace" font-size="13">
+    <text x="80" y="100">server-01.php</text>
+    <text x="390" y="100">server-02.php</text>
+    <text x="700" y="100">server-03.php</text>
+  </g>
+  <g fill="#33ff33" font-family="JetBrains Mono, Consolas, monospace" font-size="12">
+    <text x="80" y="130">$ php -v</text>
+    <text x="80" y="150">PHP 8.3.33</text>
+    <text x="390" y="130">$ ps aux | grep php</text>
+    <text x="390" y="150">php-fpm: pool www</text>
+  </g>
+  <path d="M700 90 L760 160 L720 180 L800 260 L740 240 L820 340" stroke="url(#crack)" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <circle cx="820" cy="340" r="10" fill="#ff3333"/>
+  <text x="690" y="370" fill="#ff3333" font-family="JetBrains Mono, Consolas, monospace" font-size="14" font-weight="bold">RCE</text>
+  <text x="500" y="40" fill="#33ff33" font-family="JetBrains Mono, Consolas, monospace" font-size="26" font-weight="700" text-anchor="middle">Nezáplatovaný PHP engine</text>
+</svg>
