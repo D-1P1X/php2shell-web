@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Zranitelnost | PHP2Shell</title>
+    <meta name="description" content="Technický popis zranitelností CVE-2026-109618 a CVE-2026-109619 a časová osa jejich zneužití.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="index.html">PHP2Shell</a>
+        <nav>
+            <a href="index.html">Domů</a>
+            <a href="zranitelnost.html" class="active">Zranitelnost</a>
+            <a href="ochrana.html">Ochrana</a>
+            <a href="zdroje.html">Zdroje a AI</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Zranitelnost</h1>
+        <p>Obě chyby mají společný mechanismus: PHP se při fatální chybě ukončí pomocí <code>longjmp()</code>
+        a přeskočí část čisticí logiky. Zbylý poškozený stav pak může útočník zneužít.</p>
+
+        <table>
+            <tr><th>Parametr</th><th>CVE-2026-109618</th><th>CVE-2026-109619</th></tr>
+            <tr><td>Název</td><td>OOM poškození paměti</td><td>Zastaralý globální stav</td></tr>
+            <tr><td>CVSS v4.0</td><td>9.2</td><td>9.2</td></tr>
+            <tr><td>Postižené verze</td><td>PHP 5.4 až 8.5</td><td>PHP 5.4 až 8.5</td></tr>
+            <tr><td>Nejzranitelnnější nasazení</td><td>Apache mod_php</td><td>Apache mod_php (persistentní workery)</td></tr>
+            <tr><td>Objevili</td><td colspan="2">Ryan Austin (Calif, s pomocí modelu OpenAI) a bezpečnostní tým Wiz, nezávisle</td></tr>
+        </table>
+
+        <h2>Jak k tomu došlo</h2>
+        <ul class="steps">
+            <li><strong>CVE-2026-109618:</strong> Počítadlo položky v poli se zvýší dřív, než je pro ni alokovaná
+            paměť. Pokud v tu chvíli dojde PHP paměť, zůstane po ukončení požadavku v halda poškozená hodnota,
+            kterou lze interpretovat jako platná data a dostat se tak ke spuštění kódu.</li>
+            <li><strong>CVE-2026-109619:</strong> Globální proměnné sledující stav serializace a session si
+            uchovávají ukazatel do paměti předchozího požadavku. U dlouhotrvajících PHP workerů (typicky
+            Apache mod_php) ho další požadavek zneužije jako use-after-free.</li>
+        </ul>
+
+        <h2>Časová osa</h2>
+        <img src="img/timeline.svg" alt="Časová osa: objevení chyb 1. srpna, první zneužití 17. října, únik detailů 20. října, nouzové záplaty 21. října, zařazení do CISA KEV 26. října">
+
+        <div class="terminal">
+            <div class="terminal-title">log excerpt</div>
+            <p><span class="prompt">[17. 10. 2026]</span> AWS MadPot zachytil první pokusy o zneužití, čtyři dny před
+            veřejným oznámením.<br>
+            <span class="prompt">[20. 10. 2026]</span> Detaily zranitelnosti unikly na Hacker News ještě před
+            plánovaným embargem na 15:00 UTC.<br>
+            <span class="prompt">[21. 10. 2026]</span> PHP Foundation vydala nouzové záplaty: 8.2.35, 8.3.36,
+            8.4.27 a 8.5.12.<br>
+            <span class="prompt">[26. 10. 2026]</span> CISA zařadila obě CVE do katalogu Known Exploited
+            Vulnerabilities s termínem 29. 10. pro federální instituce v USA.<span class="cursor"></span></p>
+        </div>
+
+        <blockquote>Nizozemský NCSC preventivně vypnul vlastní webové stránky, dokud nebyla nasazena záplata.</blockquote>
+    </main>
+
+    <footer class="site-footer">
+        <p>Školní projekt o kybernetické bezpečnosti. Obsah je vzdělávací a obranný, bez návodů k útokům.</p>
+    </footer>
+</body>
+</html>
