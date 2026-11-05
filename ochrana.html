@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ochrana | PHP2Shell</title>
+    <meta name="description" content="Doporučené kroky ochrany před zranitelnostmi PHP2Shell (CVE-2026-109618, CVE-2026-109619).">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="index.html">PHP2Shell</a>
+        <nav>
+            <a href="index.html">Domů</a>
+            <a href="zranitelnost.html">Zranitelnost</a>
+            <a href="ochrana.html" class="active">Ochrana</a>
+            <a href="zdroje.html">Zdroje a AI</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Ochrana</h1>
+        <p>Jediná úplná oprava je aktualizace PHP. Konfigurační obezlička typu WAF pravidlo zmírní riziko,
+        ale útok úplně nezastaví.</p>
+
+        <img src="img/mitigation.svg" alt="Schéma čtyř kroků ochrany: aktualizovat PHP, restartovat služby, rotovat klíče, monitorovat logy">
+
+        <h2>Doporučený postup</h2>
+        <ol class="steps">
+            <li><strong>Aktualizuj PHP</strong> na opravenou verzi: 8.2.35, 8.3.36, 8.4.27 nebo 8.5.12.
+            Pro doběhlé verze 7.4, 8.0 a 8.1 existují jen zdrojové patche bez oficiálních binárek.</li>
+            <li><strong>Restartuj web server a PHP-FPM</strong>, protože poškozený stav může přežívat
+            v běžících procesech i po nahrání nových souborů.</li>
+            <li><strong>Zkontroluj konfiguraci</strong> <code>memory_limit</code> a <code>post_max_size</code>:
+            pokud je <code>memory_limit</code> menší než zhruba čtyřnásobek <code>post_max_size</code>, je
+            server snadněji zneužitelný.</li>
+            <li><strong>Pokud jsi exponovaný server nestihl záplatovat včas</strong>, rotuj hesla, API klíče
+            a session klíče, protože mohly být před opravou kompromitované.</li>
+            <li><strong>Monitoruj logy</strong> a hledej hlášky typu <code>Allowed memory size… exhausted</code>
+            kombinované s <code>in Unknown on line 0</code>, což značí útok ve fázi startu požadavku.</li>
+        </ol>
+
+        <div class="terminal">
+            <div class="terminal-title">root@php2shell:~$ php -v</div>
+            <p><span class="prompt">PHP 8.3.36</span> (cli) — opravená verze, build po 21. 10. 2026<span class="cursor"></span></p>
+        </div>
+
+        <h2>Kdo je nejvíc ohrožen</h2>
+        <p>Podle analýzy Mandiant jsou snáze zneužitelná nasazení přes <strong>Apache mod_php</strong>, naopak
+        proti konfiguraci s <strong>PHP-FPM</strong> se dosud veřejné PoC exploity neukázaly jako plně funkční.
+        Shadowserver napočítal v USA skoro 282 000 instancí PHP, které dosáhly konce podpory a záplatu
+        vůbec nedostanou.</p>
+    </main>
+
+    <footer class="site-footer">
+        <p>Školní projekt o kybernetické bezpečnosti. Obsah je vzdělávací a obranný, bez návodů k útokům.</p>
+    </footer>
+</body>
+</html>
