@@ -1,0 +1,24 @@
+:root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --line: #2a313c;
+    --text: #e6edf3;
+    --muted: #9aa7b4;
+    --alert: #ff6b35;
+    --ok: #3fb950;
+    --mono: ui-monospace, "SF Mono", Consolas, "Liberation Mono", monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.65;
+}
+
+h1, h2, h3 { line-height: 1.2; }
+a { color: var(--alert); }
+code { font-family: var(--mono); background: var(--panel); padding: 0.1em 0.4em; border-radius: 4px; }
