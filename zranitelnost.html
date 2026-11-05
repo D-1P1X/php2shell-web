@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -38,7 +39,7 @@
         <h2>Jak k tomu došlo</h2>
         <ul class="steps">
             <li><strong>CVE-2026-109618:</strong> Počítadlo položky v poli se zvýší dřív, než je pro ni alokovaná
-            paměť. Pokud v tu chvíli dojde PHP paměť, zůstane po ukončení požadavku v halda poškozená hodnota,
+            paměť. Pokud v tu chvíli dojde PHP paměť, zůstane po ukončení požadavku v haldě poškozená hodnota,
             kterou lze interpretovat jako platná data a dostat se tak ke spuštění kódu.</li>
             <li><strong>CVE-2026-109619:</strong> Globální proměnné sledující stav serializace a session si
             uchovávají ukazatel do paměti předchozího požadavku. U dlouhotrvajících PHP workerů (typicky

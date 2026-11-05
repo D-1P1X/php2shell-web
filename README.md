@@ -1,6 +1,6 @@
 # PHP2Shell
 
-Školní projekt do předmětu o komunikaci s AI:vícestránkový web shrnující kritické
+Školní projekt do předmětu o komunikaci s AI: vícestránkový web shrnující kritické
 zranitelnosti v jádru PHP z října 2026, přezdívané **PHP2Shell**
 (`CVE-2026-109618`, `CVE-2026-109619`).
 
